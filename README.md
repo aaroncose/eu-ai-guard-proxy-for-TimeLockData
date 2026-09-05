@@ -126,11 +126,11 @@ sequenceDiagram
     Note over T: Cada hito incorpora el digest del anterior.<br/>Suprimir uno, reordenarlos o cortar la traza rompe la cadena.
 ```
 
-El bloque sombreado es la parte que Bartolomé describe como evidencia previa. Esas tres pruebas existen antes de que la orden salga del proxy, así que ninguna acción llega a ejecutarse sin dejar constancia de qué se pretendía, con qué reglas y con qué decisión.
+El bloque sombreado es la parte que se describe como evidencia previa. Esas tres pruebas existen antes de que la orden salga del proxy, así que ninguna acción llega a ejecutarse sin dejar constancia de qué se pretendía, con qué reglas y con qué decisión.
 
 El proxy decide y TimeLockData acredita. Ninguno de los dos hace el trabajo del otro.
 
-Los tres veredictos terminan con un mensaje al usuario en su propio chat. El proxy habla el idioma de la API del proveedor, así que ese aviso llega como si lo hubiera escrito el asistente, sin instalar nada en el lado del cliente.
+Los tres veredictos terminan con un mensaje al usuario en su propio chat y el proxy se comunica con de la API del proveedor, así que ese aviso llega como si lo hubiera escrito el asistente, sin instalar nada en el lado del cliente.
 
 ### El expediente de cada operación
 
@@ -175,7 +175,7 @@ Operadores disponibles: `required`, `in`, `not_in`, `max`, `min`, `max_exclusive
 
 ### Los cinco desenlaces
 
-Toda operación termina con un mensaje al usuario en su propio chat. El proxy habla el idioma de la API del proveedor, así que el aviso llega como si lo hubiera escrito el asistente, sin instalar nada en el lado del cliente.
+Toda operación termina con un mensaje al usuario en su propio chat, así que el aviso llega como si lo hubiera escrito el asistente, sin instalar nada en el lado del cliente.
 
 | Desenlace | Qué recibe el usuario | HTTP |
 |---|---|---|
@@ -187,7 +187,7 @@ Toda operación termina con un mensaje al usuario en su propio chat. El proxy ha
 | `EXECUTION_RESULT_MISSING` | La aplicación no informó del resultado dentro del plazo | 200 |
 | `ABORTED_EVIDENCE_FAILURE` | La prueba obligatoria no llegó a emitirse y la acción se detuvo | 503 |
 
-Un bloqueo es una prueba tan válida como una ejecución, y es la que demuestra que el control funcionó.
+Un bloqueo es una prueba tan válida como una ejecución, y demuestra que el control funciona.
 
 ### Sellado obligatorio
 
@@ -197,7 +197,7 @@ Los fallos de red y los errores 5xx del servidor se reintentan. Los 4xx, que se�
 
 ### Detección de huecos
 
-El último hito es un sello de cierre que declara cuántos pasos hubo y cuál era la huella final. Cortar la traza por el final deja los eslabones restantes intactos, y ese recuento es el que delata la supresión.
+El último hito es un sello de cierre que declara cuántos pasos hubo y cuál era la huella final. Cortar la traza por el final deja los eslabones restantes intactos.
 
 Suprimir el hito de aprobación humana de una traza produce tres incidencias independientes. Eslabón roto en el paso siguiente, hueco frente a la secuencia que la política exige, y descuadre del recuento declarado en el cierre.
 
@@ -207,7 +207,7 @@ A TimeLockData viajan la huella del hito, la huella del hito anterior, el númer
 
 ## Límites del sistema
 
-**Gobierna lo que propone el agente, no todo lo que hace la empresa.** Una persona que entra en el CRM y borra un cliente a mano queda fuera del alcance.
+**Se gobierna únicamente lo que propone el agente, no todo lo que hace la empresa.** Una persona que entra en el CRM y borra un cliente a mano queda fuera del alcance (bajo esta demo, ya que el proxy original si trata este presupuesto y podria implementarse en el producto final.
 
 **El bloqueo depende de que la aplicación cliente respete el 403.** Lo que no se puede saltar es la prueba, ya que el intento queda sellado igualmente.
 
@@ -215,11 +215,11 @@ A TimeLockData viajan la huella del hito, la huella del hito anterior, el númer
 
 **Vigila lo que las reglas digan.** Comprueba importes, destinos, herramientas y permisos. No juzga si el modelo alucina ni si el texto es sesgado.
 
-**El streaming se gobierna reteniendo solo lo necesario.** Los primeros fragmentos se retienen hasta saber qué trae la respuesta. El texto de conversación se suelta y sigue fluyendo en directo, con un retraso de milisegundos. Una llamada a herramienta corta el envío, se recompone entera y pasa por la política antes de que nada salga hacia el cliente.
+**El streaming se gobierna reteniendo solo lo necesario.** Los primeros fragmentos se retienen hasta saber qué trae la respuesta, siendo texto, uso de tools, o modo thinking. El texto de conversación se suelta y sigue fluyendo en directo, con un retraso de milisegundos. Una llamada a herramienta corta el envío, se recompone entera y pasa por la política antes de que nada salga hacia el cliente.
 
 ## Capas heredadas del proxy original
 
-Estas capas siguen en el código y se activan por configuración. En la integración con TimeLockData quedan apagadas, ya que el sello de tiempo cualificado y el anclaje los aporta la propia notaría.
+Estas capas siguen en el código y se activan por configuración. En la integración quedarían apagadas, ya que el sello de tiempo cualificado y el anclaje ya lo aporta la aqrquitectura y negocio de TimeLockData.
 
 | Capa | Variable | Estado por defecto |
 |---|---|---|
