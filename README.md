@@ -13,7 +13,7 @@
 
 Pasarela que se coloca entre las aplicaciones de IA de una empresa y el proveedor de modelos. Revisa cada acción que el agente propone antes de que llegue a ejecutarse, y convierte cada paso de esa revisión en una prueba sellada en TimeLockData.
 
-El reparto es estricto. El proxy decide. TimeLockData acredita.
+El reparto es estricto. El proxy actua como capa de gobernanza y TimeLockData se encarga de sellar lso hitos.
 
 ## Qué problema resuelve
 
